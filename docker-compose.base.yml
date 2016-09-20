@@ -1,6 +1,12 @@
 version: '2'
 
 services:
+  phpfpm-base:
+    build: conf/phpfpm
+    image: ${private_docker_registry}phpdemo/phpfpm-base${release_tag}
+    volumes:
+      - /etc/localtime:/etc/localtime:ro #for sync with host time
+
   #cache container
   redis-base:
     build: conf/redis
