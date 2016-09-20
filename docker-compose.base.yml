@@ -1,0 +1,9 @@
+version: '2'
+
+services:
+  #cache container
+  redis-base:
+    build: conf/redis
+    image: ${private_docker_registry}phpdemo/redis-base${release_tag}
+    volumes:
+      - /etc/localtime:/etc/localtime:ro #for sync with host time
