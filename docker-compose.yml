@@ -1,6 +1,21 @@
 version: '2'
 
 services:
+  varnish:
+    extends:
+      file: docker-compose.base.yml
+      service: varnish-base
+    env_file:
+      - ./conf/varnish-cache/env/web.env
+    volumes:
+      - ./conf/varnish-cache/vcl:/etc/varnish/
+    links:
+      - default_site:normal_site
+    ports:
+      - "80:80"
+    networks:
+      - back_end
+
   # application container
   default_site:
     extends:
@@ -12,8 +27,6 @@ services:
       - phpfpm
     volumes_from:
       - phpfpm
-    ports:
-      - "80:80"
     networks:
       - back_end
 

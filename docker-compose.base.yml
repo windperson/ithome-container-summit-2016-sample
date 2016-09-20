@@ -1,6 +1,11 @@
 version: '2'
 
 services:
+  varnish-base:
+    image: windperson/docker-varnish-cache
+    volumes:
+      - /etc/localtime:/etc/localtime:ro #for sync with host time
+
   # application container
   nginx-base:
     build: conf/nginx
