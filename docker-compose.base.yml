@@ -1,6 +1,13 @@
 version: '2'
 
 services:
+  # application container
+  nginx-base:
+    build: conf/nginx
+    image: ${private_docker_registry}phpdemo/nginx-base${release_tag}
+    volumes:
+      - /etc/localtime:/etc/localtime:ro #for sync with host time
+
   phpfpm-base:
     build: conf/phpfpm
     image: ${private_docker_registry}phpdemo/phpfpm-base${release_tag}
