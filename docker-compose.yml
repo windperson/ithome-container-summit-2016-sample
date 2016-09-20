@@ -1,6 +1,18 @@
 version: '2'
 
 services:
+  phpfpm:
+    extends:
+      file: docker-compose.base.yml
+      service: phpfpm-base
+    volumes:
+      - ./conf/phpfpm/config:/usr/local/etc
+      - ./src/php:/var/www/html
+    links:
+      - redis0cache
+    networks:
+      - back_end
+
   #cache container
   redis0cache:
     extends:
